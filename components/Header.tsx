@@ -46,14 +46,14 @@ export function Header() {
                 href="https://github.com/vanlumban"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-lg border border-border hover:bg-secondary transition-colors"
+                className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-md border border-border hover:bg-secondary transition active:scale-[0.98]"
               >
                 <Github className="h-4 w-4" />
                 View GitHub
               </Link>
               <button
                 onClick={() => setIsContactModalOpen(true)}
-                className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-lg bg-foreground text-background hover:opacity-90 transition-opacity"
+                className="inline-flex items-center gap-2 text-sm px-4 py-2 rounded-md bg-foreground text-background hover:opacity-90 transition active:scale-[0.98]"
               >
                 Get in Touch
               </button>
@@ -62,7 +62,7 @@ export function Header() {
             {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="md:hidden p-2 hover:bg-secondary rounded-lg transition-colors"
+              className="md:hidden p-2 hover:bg-secondary rounded-md transition-colors"
               aria-label="Toggle menu"
             >
               {isMenuOpen ? (
@@ -82,7 +82,7 @@ export function Header() {
                     key={link.href}
                     href={link.href}
                     onClick={() => setIsMenuOpen(false)}
-                    className="text-sm text-muted-foreground hover:text-foreground hover:bg-secondary px-4 py-2 rounded-lg transition-colors"
+                    className="text-sm text-muted-foreground hover:text-foreground hover:bg-secondary px-4 py-2 rounded-md transition-colors"
                   >
                     {link.label}
                   </Link>
@@ -93,7 +93,7 @@ export function Header() {
                     target="_blank"
                     rel="noopener noreferrer"
                     onClick={() => setIsMenuOpen(false)}
-                    className="inline-flex items-center justify-center gap-2 text-sm px-4 py-2 rounded-lg border border-border hover:bg-secondary transition-colors"
+                    className="inline-flex items-center justify-center gap-2 text-sm px-4 py-2 rounded-md border border-border hover:bg-secondary transition active:scale-[0.98]"
                   >
                     <Github className="h-4 w-4" />
                     View GitHub
@@ -103,7 +103,7 @@ export function Header() {
                       setIsMenuOpen(false)
                       setIsContactModalOpen(true)
                     }}
-                    className="inline-flex items-center justify-center gap-2 text-sm px-4 py-2 rounded-lg bg-foreground text-background hover:opacity-90 transition-opacity"
+                    className="inline-flex items-center justify-center gap-2 text-sm px-4 py-2 rounded-md bg-foreground text-background hover:opacity-90 transition active:scale-[0.98]"
                   >
                     Get in Touch
                   </button>
