@@ -5,10 +5,11 @@ import Image from 'next/image'
 import Link from 'next/link'
 import { ContactModal } from '@/components/ContactModal'
 import { PhoneMockup, usePhoneDemo } from '@/components/PhoneMockup'
-import { Github, Linkedin, Mail, ArrowRight, Star } from 'lucide-react'
+import { Github, Linkedin, Mail, ArrowRight, Star, ExternalLink } from 'lucide-react'
 import { portfolioConfig } from '@/config/portfolio'
 
 type App = (typeof portfolioConfig.apps)[number]
+type Website = (typeof portfolioConfig.websites)[number]
 
 const [flagshipService, ...otherServices] = portfolioConfig.services
 
@@ -97,12 +98,7 @@ function ProjectRow({
           <span className="font-mono text-[10px] uppercase tracking-wider">
             {app.industry}
           </span>
-          <span
-            title="Placeholder: set your real role in config/portfolio.ts"
-            className="border-b border-dashed border-muted-foreground/40 text-muted-foreground/80"
-          >
-            {app.role}
-          </span>
+          <span className="text-muted-foreground">{app.role}</span>
         </div>
 
         <div className="mt-2.5 flex flex-wrap gap-1.5">
@@ -117,6 +113,70 @@ function ProjectRow({
         </div>
       </div>
     </button>
+  )
+}
+
+function WebsiteCard({ site }: { site: Website }) {
+  return (
+    <article className="reveal group grid items-center gap-6 rounded-xl border border-border bg-card/40 p-4 transition-colors hover:border-accent/40 sm:grid-cols-[minmax(0,5fr)_minmax(0,7fr)] md:gap-8 md:p-5">
+      <div className="relative aspect-[16/10] overflow-hidden rounded-lg border border-border">
+        <Image
+          src={site.cover}
+          alt={`${site.title} website preview`}
+          fill
+          sizes="(max-width: 640px) 100vw, 40vw"
+          className="object-cover transition-transform duration-300 group-hover:scale-[1.03]"
+        />
+      </div>
+
+      <div className="min-w-0">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1.5">
+          <h4 className="text-xl font-medium tracking-tight md:text-2xl">
+            {site.title}
+          </h4>
+          <span className="rounded-sm border border-border px-1.5 py-0.5 font-mono text-[10px] uppercase tracking-wider text-muted-foreground">
+            {site.industry}
+          </span>
+        </div>
+
+        <p className="mt-2.5 max-w-[65ch] text-sm leading-relaxed text-muted-foreground">
+          {site.description}
+        </p>
+
+        <div className="mt-3.5 flex flex-wrap gap-1.5">
+          {site.technologies.map((tech) => (
+            <span
+              key={tech}
+              className="rounded-full border border-border px-2.5 py-0.5 text-[11px] text-muted-foreground"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        <div className="mt-5 flex flex-wrap items-center gap-x-5 gap-y-2">
+          <a
+            href={site.site}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-2 whitespace-nowrap rounded-md bg-foreground px-4 py-2 text-xs font-medium text-background transition hover:opacity-90 active:scale-[0.98]"
+          >
+            Visit site
+            <ExternalLink className="h-3.5 w-3.5" />
+          </a>
+          {site.demo && (
+            <a
+              href={site.demo}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-xs font-medium text-muted-foreground underline underline-offset-4 transition-colors hover:text-foreground"
+            >
+              Live demo
+            </a>
+          )}
+        </div>
+      </div>
+    </article>
   )
 }
 
@@ -234,6 +294,20 @@ export default function Portfolio() {
               ))}
             </div>
           </div>
+
+          {/* Websites: live web products, link-out (not part of the phone demo) */}
+          {portfolioConfig.websites.length > 0 && (
+            <div className="mt-20 border-t border-border pt-12">
+              <h3 className="mb-8 text-2xl font-medium tracking-tight md:text-3xl">
+                Websites
+              </h3>
+              <div className="flex flex-col gap-5">
+                {portfolioConfig.websites.map((site) => (
+                  <WebsiteCard key={site.id} site={site} />
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
